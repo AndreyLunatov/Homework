@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-// Функція для створення динамічного масиву
+
 int* createArray(int& size, int& capacity, int initialCapacity) {
     capacity = (initialCapacity <= 0) ? 10 : initialCapacity;
     size = 0;
     return new int[capacity];
 }
 
-// Функція для збільшення місткості масиву
+
 void resize(int*& arr, int& size, int& capacity) {
     capacity *= 2;
     int* newArr = new int[capacity];
@@ -19,9 +19,8 @@ void resize(int*& arr, int& size, int& capacity) {
     arr = newArr;
 }
 
-// Функція для зменшення місткості масиву
 void shrink(int*& arr, int& size, int& capacity) {
-    if (capacity <= 10) return; // Не зменшуємо нижче початкової місткості
+    if (capacity <= 10) return; 
     capacity /= 2;
     int* newArr = new int[capacity];
     for (int i = 0; i < size; i++) {
@@ -31,48 +30,47 @@ void shrink(int*& arr, int& size, int& capacity) {
     arr = newArr;
 }
 
-// Функція для додавання елемента за індексом
+
 void addElement(int*& arr, int& size, int& capacity, int index, int value) {
     if (index < 0 || index > size) {
         cout << "Некоректний індекс! Індекс повинен бути від 0 до " << size << endl;
         return;
     }
 
-    // Якщо масив заповнений, збільшуємо місткість
+  
     if (size == capacity) {
         resize(arr, size, capacity);
     }
 
-    // Зсув елементів вправо від індексу
+   
     for (int i = size; i > index; i--) {
         arr[i] = arr[i - 1];
     }
 
-    // Вставка нового елемента
+   
     arr[index] = value;
     size++;
 }
 
-// Функція для видалення елемента за індексом
+
 void removeElement(int*& arr, int& size, int& capacity, int index) {
     if (index < 0 || index >= size) {
         cout << "Некоректний індекс! Індекс повинен бути від 0 до " << size - 1 << endl;
         return;
     }
 
-    // Зсув елементів вліво для заповнення видаленого місця
     for (int i = index; i < size - 1; i++) {
         arr[i] = arr[i + 1];
     }
     size--;
 
-    // Якщо розмір значно менший за місткість, зменшуємо масив
+    
     if (size < capacity / 2 && capacity > 10) {
         shrink(arr, size, capacity);
     }
 }
 
-// Функція для виведення масиву
+
 void printArray(int* arr, int size) {
     if (size == 0) {
         cout << "Масив порожній" << endl;
@@ -85,7 +83,7 @@ void printArray(int* arr, int size) {
     cout << endl;
 }
 
-// Функція для звільнення пам'яті
+
 void freeArray(int* arr) {
     delete[] arr;
 }
@@ -93,7 +91,7 @@ void freeArray(int* arr) {
 int main() {
     setlocale(LC_ALL, "ukr");
 
-    // Запитуємо початкову місткість масиву
+   
     int initialCapacity;
     cout << "Введіть початкову місткість масиву (або 0 для значення за замовчуванням): ";
     cin >> initialCapacity;
