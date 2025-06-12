@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Функція для виведення масиву
+
 void printArray(int* arr, int size) {
     for (int i = 0; i < size; i++) {
         cout << arr[i] << " ";
@@ -149,7 +149,7 @@ int main() {
     cout << "Масив після видалення блоку: ";
     printArray(arr, size);
 
-    // Очищення пам'яті
+
     delete[] arr;
     delete[] negArr;
     delete[] block;
